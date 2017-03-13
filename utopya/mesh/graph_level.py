@@ -6,6 +6,8 @@
 # Copyright (c) 2017 Martin Hautefeuille & Adrián Rosolen
 
 
+from mesh.mesh_entity import MeshEntity
+
 class GraphLevel:
     """Level in the mesh graph containing a boundary and coboundary
 
@@ -25,8 +27,8 @@ class GraphLevel:
         """Inits a level of the mesh graph; its boundary and coboundary
 
         Args:
-            A spatial dimension of the mesh
-            A spatial dimension of the graph level
+            meshdim: spatial dimension of the mesh
+            dim:     spatial dimension of the graph level
 
         Raise:
             ValueError: if mesh dim different from 2 or 3
@@ -39,6 +41,17 @@ class GraphLevel:
         self.__dim = dim
         self.__boundary = None
         self.__coboundary = None
+
+    @boundary.setter
+    def boundary(self, connec):
+        """Sets the boundary of the entities from connectivity connec
+
+        Args:
+            connec: for all the mesh entitites in the graph level, list of
+                    the dim-1 mesh entitiies that they are connected to.
+        """
+        for e in connec:
+            self.__boundary.append([MeshEntity(i) for i in e])
 
 
 # end of file
