@@ -22,7 +22,7 @@ class Mesh:
         """Inits a Mesh class
 
         Args:
-            A spatial dimension
+            dim: spatial dimension of the mesh
 
         Raise:
             ValueError: if dim different from 2 or 3
