@@ -6,7 +6,7 @@
 # Copyright (c) 2017 Martin Hautefeuille & Adrián Rosolen
 
 
-from mesh.graphlevel import GraphLevel
+from mesh.graph_level import GraphLevel
 
 
 class Graph:
@@ -30,6 +30,33 @@ class Graph:
             raise ValueError('Unsupported mesh dim: {}'.format(dim))
         self.__dim = dim
         self.__levels = [GraphLevel(dim, i) for i in range(dim+1)]
+
+    def add_boundary(self, dim, connectivities):
+        """Add connectivity of bondary to all the mesh entities of level dim
+
+        Arg:
+            dim: spatial dimension of the graph level to which boundary
+                 connectivities is going to be added
+            connectivities: For each mesh entities of the graph level dim,
+                            it is the list of dim-1 mesh entities connected.
+                                       1
+                                 +-----------+
+                                 |           |
+                                 |           |
+                               4 |     A     | 2
+                                 |           |
+                                 |           |
+                                 +-----------+
+                                       3
+                            e.g. the boundary of face A is the following list
+                            of egde ids: [1, 2, 3, 4]
+
+        Raise:
+            ValueError: if dim negative of greate than mesh dimension
+        """
+        if not 0 <= dim <= self.__dim:
+            raise ValueError('No graph level of dimension: {}'.format(dim))
+        self.__level[dim].boundary(connectivities)
 
 
 # end of file
