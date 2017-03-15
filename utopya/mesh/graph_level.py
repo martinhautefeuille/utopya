@@ -6,6 +6,9 @@
 # Copyright (c) 2017 Martin Hautefeuille & Adrián Rosolen
 
 
+from utils.setter_property import SetterProperty
+
+
 class GraphLevel:
     """Level in the mesh graph containing a boundary and coboundary
 
@@ -40,7 +43,7 @@ class GraphLevel:
         self.__boundary = None
         self.__coboundary = None
 
-    @boundary.setter
+    @SetterProperty
     def boundary(self, connec):
         """Sets the boundary of the entities from connectivity connec
 
@@ -49,7 +52,7 @@ class GraphLevel:
                     the dim-1 mesh entitiies that they are connected to.
         """
         for e in connec:
-            self.__boundary.append([(i, True) for i in e])
+            self.__dict['__boundary'].append([(i, True) for i in e])
 
     def set_boundary_orientation(self, e, i, isIn):
         """Sets the orientation of dim-1 mesh entity in the boundary of a
