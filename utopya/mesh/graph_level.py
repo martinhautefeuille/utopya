@@ -6,8 +6,6 @@
 # Copyright (c) 2017 Martin Hautefeuille & Adrián Rosolen
 
 
-from mesh.mesh_entity import MeshEntity
-
 class GraphLevel:
     """Level in the mesh graph containing a boundary and coboundary
 
@@ -51,7 +49,23 @@ class GraphLevel:
                     the dim-1 mesh entitiies that they are connected to.
         """
         for e in connec:
-            self.__boundary.append([MeshEntity(i) for i in e])
+            self.__boundary.append([(i, True) for i in e])
+
+    def set_boundary_orientation(self, e, i, isIn):
+        """Sets the orientation of dim-1 mesh entity in the boundary of a
+            mesh entity
+
+        Args:
+            e:    index of a mesh entity in the graph level
+            i:    index of a dim-1 mesh entity in the boundary of e
+            isIn: True if i is pointing inside e, false otherwise
+
+        Raise:
+            TypeError if isIn is not a boolean
+        """
+        if type(isIn) is not bool:
+            raise TypeError('Last argument should be a boolean')
+        self.__boundary[e][i][1] = isIn
 
 
 # end of file
