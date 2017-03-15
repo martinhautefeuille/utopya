@@ -56,7 +56,7 @@ class Graph:
         """
         if not 0 <= dim <= self.__dim:
             raise ValueError('No graph level of dimension: {}'.format(dim))
-        self.__level[dim].boundary(connectivities)
+        self.__level[dim].boundary = connectivities
 
 
 # end of file
