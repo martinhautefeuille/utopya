@@ -37,6 +37,9 @@ def decode(meshStream):
         mesh = Mesh(dim)
     except ValueError:
         raise ValueError('Unsupported mesh dim: {}'.format(dim))
+    # set nodal coordinates
+    mesh.coordinates = meshDict["nodes"]
+    # return a populated mesh
     return mesh
 
 
