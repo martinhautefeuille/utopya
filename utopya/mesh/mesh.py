@@ -8,7 +8,6 @@
 
 from mesh.graph import Graph
 
-
 class Mesh:
     """Mesh object containing the graph and the nodal coordinates
 
@@ -35,8 +34,28 @@ class Mesh:
 
     @property
     def dim(self):
-       """Getter of spatial dimension"""
-       return self.__dim
+        """Getter of spatial dimension"""
+        return self.__dim
+
+    @property
+    def coord(self):
+        """Gets the coordinates"""
+        return self.__coord
+
+    @coord.setter
+    def coordinates(self, nodes):
+        """Sets the coordinates
+
+        Args:
+            nodes: a list of nodal coordinates
+
+        Raise:
+            ValueError if each coordinate doesn't have the same dim as mesh
+        """
+        for i, n in enumerate(nodes):
+            if len(n) is not self.__dim:
+                raise ValueError('Coord {} dim != {}'.format(n, self.__dim))
+            self.__coord.append(float(x) for x in n)
 
 
 #end of file
