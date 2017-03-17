@@ -39,7 +39,8 @@ def main():
             """)
     m = decode(meshStream)
     print('Decoded a mesh of dimension: {}'.format(m.dim))
-
+    for i, n in enumerate(m.coord):
+        print('{}th coordinate: {}'.format(i, [x for x in n]))
 
 
 if __name__ == "__main__":
