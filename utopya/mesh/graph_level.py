@@ -53,6 +53,9 @@ class GraphLevel:
             connec: for all the mesh entitites in the graph level, list of
                     the dim-1 mesh entitiies that they are connected to.
         """
+        # set self.__boundary as a list
+        self.__boundary = []
+        # then, fill it up
         for e in connec:
             self.__boundary.append([(i, True) for i in e])
 
