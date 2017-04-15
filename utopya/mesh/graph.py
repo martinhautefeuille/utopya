@@ -35,8 +35,8 @@ class Graph:
         """Add connectivity of bondary to all the mesh entities of level dim
 
         Arg:
-            dim: spatial dimension of the graph level to which boundary
-                 connectivities is going to be added
+            dim:            spatial dimension of the graph level to which
+                            boundary connectivities is going to be added
             connectivities: For each mesh entities of the graph level dim,
                             it is the list of dim-1 mesh entities connected.
                                        1
@@ -56,7 +56,23 @@ class Graph:
         """
         if not 0 <= dim <= self.__dim:
             raise ValueError('No graph level of dimension: {}'.format(dim))
-        self.__level[dim].boundary = connectivities
+        self.__levels[dim].boundary = connectivities
+
+    def level(self, dim):
+        """Return the graph level of requested spatial dimension
+
+        Args:
+           dim: spatial dimension of the desired graph level
+
+       Raise:
+           ValueError: if dim is negative of strictly greater than the spatial
+                       dimension of the graph
+        """
+        if dim not in range(self.__dim+1):
+            raise ValueError(
+                    'No level of dim {} in graph of dim {}'.format(dim,
+                                                                   self.__dim))
+        return self.__levels[dim]
 
 
 # end of file
