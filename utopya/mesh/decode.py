@@ -39,6 +39,15 @@ def decode(meshStream):
         raise ValueError('Unsupported mesh dim: {}'.format(dim))
     # set nodal coordinates
     mesh.coordinates = meshDict["nodes"]
+    # set edge connectivity
+    mesh.add_connectivity(1, meshDict["edges"])
+    # set face connectivity, if 3D
+    if dim is 3:
+        mesh.add_connectivity(2, meshDict["faces"])
+    # set element connectivity
+    for s in meshDict["elsets"]:
+        mesh.add_connectivity(dim, s["connec"], s["material"])
+
     # return a populated mesh
     return mesh
 
